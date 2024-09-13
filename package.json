@@ -1,0 +1,16 @@
+{
+  "name": "recette-backend",
+  "version": "1.0.0",
+  "description": "gestion-recette-backend",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Fatimata Aliou Sall",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.0",
+    "mysql2": "^3.11.2"
+  }
+}
