@@ -1,0 +1,19 @@
+CREATE TABLE recipes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    type VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,
+    ingredient TEXT NOT NULL
+);
+
+
+INSERT INTO recipes (title, type, description, ingredient) 
+VALUES ('Salade César', 'entrée', 'Une salade avec poulet, laitue et parmesan.', 'Poulet');
+INSERT INTO recipes (title, type, description, ingredient) 
+VALUES ('Tiramisu', 'dessert', 'Un dessert italien classique.', 'Cacao');
+
+INSERT INTO recipes (title, type, description, ingredient)
+VALUES 
+('Pizza Margherita', 'plat', 'Une pizza classique avec de la sauce tomate, mozzarella, et basilic.', 'Tomate'),
+('Soupe à l\'oignon', 'entrée', 'Une soupe française à base d\'oignons caramélisés, servie avec du pain grillé et du fromage.', 'Mozzarella'),
+('Salade de carottes', 'entrée', 'Une salade avec des carottes cuites, citron et oignon.', 'Carottes, citron, oignon');
