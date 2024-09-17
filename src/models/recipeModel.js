@@ -35,7 +35,7 @@ async checkRecipe(title) {
 },
 
   // Méthode pour mettre à jour une recette
-  // Méthode pour mettre à jour une recette
+  
 async update(id, updatedData) {
   try {
     const [result] = await db.promise().query(

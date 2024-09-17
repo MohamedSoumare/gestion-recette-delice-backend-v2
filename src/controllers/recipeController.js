@@ -46,7 +46,6 @@ const recipeController = {
   },
 
   // Mettre à jour une recette existante
-  // Mettre à jour une recette existante
 async updateRecipe(req, res) {
   const { id } = req.params;
   const updatedData = req.body; // Contiendra les champs à mettre à jour
