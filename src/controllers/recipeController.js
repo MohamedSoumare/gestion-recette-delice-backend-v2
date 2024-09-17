@@ -46,20 +46,28 @@ const recipeController = {
   },
 
   // Mettre à jour une recette existante
-  async updateRecipe(req, res) {
-    const { id } = req.params;
-    const updatedData = req.body; // Contiendra les champs à mettre à jour
-    try {
-      const result = await Recipe.update(id, updatedData);
-      if (result.affectedRows > 0) {
-        res.status(200).json({ message: 'Recette mise à jour avec succès' });
-      } else {
-        res.status(404).json({ message: 'Recette non trouvée' });
-      }
-    } catch (error) {
-      res.status(500).json({ message: 'Erreur lors de la mise à jour de la recette' });
+  // Mettre à jour une recette existante
+async updateRecipe(req, res) {
+  const { id } = req.params;
+  const updatedData = req.body; // Contiendra les champs à mettre à jour
+  
+  try {
+    const recipeExists = await Recipe.getById(id); // Vérifier si la recette existe
+    if (recipeExists.length === 0) {
+      return res.status(404).json({ message: 'Recette non trouvée' });
     }
-  },
+
+    const result = await Recipe.update(id, updatedData); // Mise à jour de la recette
+    if (result.affectedRows > 0) {
+      res.status(200).json({ message: 'Recette mise à jour avec succès' });
+    } else {
+      res.status(400).json({ message: 'Erreur lors de la mise à jour de la recette' });
+    }
+  } catch (error) {
+    console.error('Error in updateRecipe:', error);
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
+},
 
   // Supprimer une recette
   async deleteRecipe(req, res) {

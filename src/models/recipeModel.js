@@ -35,10 +35,19 @@ async checkRecipe(title) {
 },
 
   // Méthode pour mettre à jour une recette
-  async update(id, updatedData) {
-    const [result] = await db.promise().query('UPDATE recipes SET ? WHERE id = ?', [updatedData, id]);
+  // Méthode pour mettre à jour une recette
+async update(id, updatedData) {
+  try {
+    const [result] = await db.promise().query(
+      'UPDATE recipes SET ? WHERE id = ?',
+      [updatedData, id]
+    );
     return result;
-  },
+  } catch (error) {
+    console.error('Erreur SQL lors de la mise à jour:', error);
+    throw error; 
+  }
+},
 
   // Méthode pour supprimer une recette
   async delete(id) {
