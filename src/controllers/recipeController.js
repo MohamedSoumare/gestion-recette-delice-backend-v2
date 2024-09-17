@@ -30,10 +30,16 @@ const recipeController = {
 
   // Ajouter une nouvelle recette
   async addRecipe(req, res) {
-    const { title, type, description, ingredients } = req.body;
+    const { title, type,  ingredient, description } = req.body;
+
+    if (!title || !ingredient || !type || !description) {
+      return res.status(400).json({ message: 'Données invalides : tous les champs sont obligatoires' });
+    }
+  
     try {
-      await Recipe.create(title, type, description, ingredients);
-      res.status(201).json({ message: 'Recette créée avec succès' });
+       
+      await Recipe.create(title, type, description, ingredient);
+      res.status(200).json({ message: 'Recette créée avec succès' });
     } catch (error) {
       res.status(500).json({ message: 'Erreur lors de la création de la recette' });
     }
