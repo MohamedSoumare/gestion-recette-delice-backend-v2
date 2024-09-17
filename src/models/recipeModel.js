@@ -1,58 +1,59 @@
-const db = require('../config/db');
+const db = require('../config/db'); // Assurez-vous que cette configuration est correcte
 
-// Récupérer toutes les recettes
-exports.getAllRecipes = (callback) => {
-  const query = 'SELECT * FROM recipes';
-  db.query(query, (err, results) => {
-    if (err) {
-      return callback(err, null);
+const Recipe = {
+  // Méthode pour obtenir toutes les recettes
+  async getAll() {
+    const [rows] = await db.promise().query('SELECT * FROM recipes');
+    return rows;
+  },
+
+  // Méthode pour obtenir une recette par son ID
+  async getById(id) {
+    const [rows] = await db.promise().query('SELECT * FROM recipes WHERE id = ?', [id]);
+    return rows;
+  },
+
+  // Méthode pour créer une nouvelle recette
+  async create(title, type, description, ingredient) {
+    try {
+      const [result] = await db.promise().query(
+        'INSERT INTO recipes (title, type, ingredient, description) VALUES (?, ?, ?, ?)',
+        [title, type, ingredient, description]
+      );
+      return result;
+    } catch (error) {
+      console.error('Erreur SQL lors de la création:', error); // Log de l'erreur SQL
+      throw error; // Relancer l'erreur pour qu'elle soit capturée dans le contrôleur
     }
-    callback(null, results);
-  });
+  },
+  
+
+  // Méthode pour vérifier si une recette avec un titre existe déjà
+async checkRecipe(title) {
+  const [rows] = await db.promise().query('SELECT COUNT(*) as count FROM recipes WHERE title = ?', [title]);
+  return rows[0].count; // Retourne le nombre de recettes avec ce titre
+},
+
+  // Méthode pour mettre à jour une recette
+  // Méthode pour mettre à jour une recette
+async update(id, updatedData) {
+  try {
+    const [result] = await db.promise().query(
+      'UPDATE recipes SET ? WHERE id = ?',
+      [updatedData, id]
+    );
+    return result;
+  } catch (error) {
+    console.error('Erreur SQL lors de la mise à jour:', error);
+    throw error; 
+  }
+},
+
+  // Méthode pour supprimer une recette
+  async delete(id) {
+    const [result] = await db.promise().query('DELETE FROM recipes WHERE id = ?', [id]);
+    return result;
+  }
 };
 
-// Récupérer une recette par son ID
-exports.getRecipeById = (id, callback) => {
-  const query = 'SELECT * FROM recipes WHERE id = ?';
-  db.query(query, [id], (err, result) => {
-    if (err) {
-      return callback(err, null);
-    }
-    callback(null, result[0]);
-  });
-};
-
-// Ajouter une nouvelle recette
-exports.addRecipe = (recipeData, callback) => {
-  const { title, ingredients, type } = recipeData;
-  const query = 'INSERT INTO recipes (title, ingredients, type) VALUES (?, ?, ?)';
-  db.query(query, [title, ingredients, type], (err, result) => {
-    if (err) {
-      return callback(err, null);
-    }
-    callback(null, result);
-  });
-};
-
-// Mettre à jour une recette
-exports.updateRecipe = (id, recipeData, callback) => {
-  const { title, ingredients, type } = recipeData;
-  const query = 'UPDATE recipes SET title = ?, ingredients = ?, type = ? WHERE id = ?';
-  db.query(query, [title, ingredients, type, id], (err, result) => {
-    if (err) {
-      return callback(err, null);
-    }
-    callback(null, result);
-  });
-};
-
-
-exports.deleteRecipe = (id, callback) => {
-  const query = 'DELETE FROM recipes WHERE id = ?';
-  db.query(query, [id], (err, result) => {
-    if (err) {
-      return callback(err, null);
-    }
-    callback(null, result);
-  });
-};
+module.exports = Recipe;
