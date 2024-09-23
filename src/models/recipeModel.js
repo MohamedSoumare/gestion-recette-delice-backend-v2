@@ -5,7 +5,7 @@ const Recipe = {
   async getAll() {
     const [rows] = await db.promise().query('SELECT * FROM recipes');
     return rows;
-  },
+},
 
   // Méthode pour obtenir une recette par son ID
   async getById(id) {
@@ -34,7 +34,6 @@ async checkRecipe(title) {
   return rows[0].count; // Retourne le nombre de recettes avec ce titre
 },
 
-  // Méthode pour mettre à jour une recette
   // Méthode pour mettre à jour une recette
 async update(id, updatedData) {
   try {
