@@ -1,53 +1,48 @@
-import db  from '../config/db.js'; 
+import db from '../config/db.js';
 
 const Recipe = {
-   async getAll() {
-    const [rows] = await db.promise().query('SELECT * FROM recipes');
-    return rows;
-},
-
-    async getById(id) {
-    const [rows] = await db.promise().query('SELECT * FROM recipes WHERE id = ?', [id]);
-    return rows;
+  create: async (title, type, description, ingredient) => {
+    const query = 'INSERT INTO recipes (title, type, description, ingredient) VALUES (?, ?, ?, ?)';
+    const [result] = await db.query(query, [title, type, description, ingredient]);
+    return result;
   },
 
-  
-  async create(title, type, description, ingredient) {
-    try {
-      const [result] = await db.promise().query(
-        'INSERT INTO recipes (title, type, ingredient, description) VALUES (?, ?, ?, ?)',
-        [title, type, ingredient, description]
-      );
-      return result;
-    } catch (error) {
-      console.error('Erreur SQL lors de la création:', error); 
-      throw error;
-    }
+  checkRecipe: async (title) => {
+    const [rows] = await db.query('SELECT COUNT(*) as count FROM recipes WHERE title = ?', [title]);
+    return rows[0].count; // Returns the number of recipes with this title
   },
-  
 
-async checkRecipe(title) {
-  const [rows] = await db.promise().query('SELECT COUNT(*) as count FROM recipes WHERE title = ?', [title]);
-  return rows[0].count; 
+  getById: async (id) => {
+    const query = 'SELECT * FROM recipes WHERE id = ?';
+    const [rows] = await db.query(query, [id]);
+    return rows.length > 0 ? rows[0] : null;
+  },
+
+
+update: async (id, updatedData) => {
+  const query = 'UPDATE recipes SET title = ?, type = ?, description = ?, ingredient = ? WHERE id = ?';
+  const [result] = await db.query(query, [
+    updatedData.title,
+    updatedData.type,
+    updatedData.description,
+    updatedData.ingredient,
+    id,
+  ]);
+  return result;
 },
 
-async update(id, updatedData) {
-  try {
-    const [result] = await db.promise().query(
-      'UPDATE recipes SET ? WHERE id = ?',
-      [updatedData, id]
-    );
-    return result;
-  } catch (error) {
-    console.error('Erreur SQL lors de la mise à jour:', error);
-    throw error; 
-  }
+// Méthode de suppression
+delete: async (id) => {
+  const query = 'DELETE FROM recipes WHERE id = ?';
+  const [result] = await db.query(query, [id]);
+  return result; 
 },
 
-  async delete(id) {
-    const [result] = await db.promise().query('DELETE FROM recipes WHERE id = ?', [id]);
-    return result;
-  }
+  getAll: async () => {
+    const query = 'SELECT * FROM recipes';
+    const [rows] = await db.query(query);
+    return rows;
+  },
 };
 
 export default Recipe;
