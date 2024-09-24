@@ -2,11 +2,17 @@
   "name": "recette-backend",
   "version": "1.0.0",
   "description": "gestion-recette-backend",
+  "type": "module",
   "main": "app.js",
   "type": "module",
   "scripts": {
     "test": "jasmine",
-    "start": "nodemon app.js"
+
+    "start": "nodemon app.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  
+
   },
   "author": "Fatimata Aliou Sall",
   "license": "ISC",
@@ -22,8 +28,16 @@
     "nodemon": "^3.1.4"
   },
   "devDependencies": {
+
+    "@eslint/js": "^9.11.1",
+    "@types/jest": "^29.5.13",
+    "eslint": "^9.11.1",
+    "globals": "^15.9.0",
     "jasmine": "^5.3.0",
+    "jasmine-spec-reporter": "^7.0.0",
     "jest": "^29.7.0",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "ts-jest": "^29.2.5"
+
   }
 }

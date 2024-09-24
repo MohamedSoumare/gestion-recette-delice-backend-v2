@@ -12,6 +12,7 @@ const Recipe = {
     return rows[0].count; // Returns the number of recipes with this title
   },
 
+
   getById: async (id) => {
     const query = 'SELECT * FROM recipes WHERE id = ?';
     const [rows] = await db.query(query, [id]);
@@ -45,4 +46,6 @@ delete: async (id) => {
   },
 };
 
+
 export default Recipe;
+

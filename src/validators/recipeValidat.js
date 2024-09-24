@@ -51,6 +51,7 @@ const updateRequestValidator = [
     .isEmpty()
     .withMessage("L'ID de la recette est requis.")
     .bail()
+
     .custom(async (value) => {
       const recipe = await Recipe.getById(value);
       if (!recipe) {
