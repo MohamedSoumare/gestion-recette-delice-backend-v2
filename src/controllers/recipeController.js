@@ -1,5 +1,5 @@
-const Recipe = require('../models/recipeModel');  
 
+import Recipe from '../models/recipeModel';
 // Contrôleur pour gérer les opérations sur les recettes
 const recipeController = {
   // Récupérer toutes les recettes
@@ -13,7 +13,7 @@ const recipeController = {
     }
   },
 
-  // Récupérer une recette par son ID
+  // Récupérer une recette par son ID 
   async getRecipeById(req, res) {
     const { id } = req.params;
     try {
@@ -46,27 +46,27 @@ const recipeController = {
   },
 
   // Mettre à jour une recette existante
-async updateRecipe(req, res) {
-  const { id } = req.params;
-  const updatedData = req.body; // Contiendra les champs à mettre à jour
+  async updateRecipe(req, res) {
+    const { id } = req.params;
+    const updatedData = req.body; // Contiendra les champs à mettre à jour
   
-  try {
-    const recipeExists = await Recipe.getById(id); // Vérifier si la recette existe
-    if (recipeExists.length === 0) {
-      return res.status(404).json({ message: 'Recette non trouvée' });
-    }
+    try {
+      const recipeExists = await Recipe.getById(id); // Vérifier si la recette existe
+      if (recipeExists.length === 0) {
+        return res.status(404).json({ message: 'Recette non trouvée' });
+      }
 
-    const result = await Recipe.update(id, updatedData); // Mise à jour de la recette
-    if (result.affectedRows > 0) {
-      res.status(200).json({ message: 'Recette mise à jour avec succès' });
-    } else {
-      res.status(400).json({ message: 'Erreur lors de la mise à jour de la recette' });
+      const result = await Recipe.update(id, updatedData); // Mise à jour de la recette
+      if (result.affectedRows > 0) {
+        res.status(200).json({ message: 'Recette mise à jour avec succès' });
+      } else {
+        res.status(400).json({ message: 'Erreur lors de la mise à jour de la recette' });
+      }
+    } catch (error) {
+      console.error('Error in updateRecipe:', error);
+      res.status(500).json({ message: 'Erreur serveur' });
     }
-  } catch (error) {
-    console.error('Error in updateRecipe:', error);
-    res.status(500).json({ message: 'Erreur serveur' });
-  }
-},
+  },
 
   // Supprimer une recette
   async deleteRecipe(req, res) {

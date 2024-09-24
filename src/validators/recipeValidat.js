@@ -37,7 +37,7 @@ const deleteRequestValidator = [
     .custom(async (value, { req }) => {
       const result = await Recipe.getById(value); // Correction ici : appel correct à getById
       if (result.length === 0) {
-        throw new Error("Cette recette n'existe pas!");
+        throw new Error('Cette recette n\'existe pas!');
       }
       return true;
     }),
