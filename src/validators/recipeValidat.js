@@ -5,7 +5,9 @@ import Recipe from '../models/RecipeModel.js ';
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({ errors: errors.array() });
+    return res
+      .status(StatusCodes.UNPROCESSABLE_ENTITY)
+      .json({ errors: errors.array() });
   }
   next();
 };
@@ -33,12 +35,12 @@ const deleteRequestValidator = [
   param('id')
     .not()
     .isEmpty()
-    .withMessage("L'ID est obligatoire.")
+    .withMessage('L/ID est obligatoire.')
     .bail()
     .custom(async (value) => {
       const recipe = await Recipe.getById(value);
       if (!recipe) {
-        throw new Error("Cette recette n'existe pas.");
+        throw new Error('Cette recette n/existe pas.');
       }
       return true;
     }),
@@ -49,20 +51,20 @@ const updateRequestValidator = [
   param('id')
     .not()
     .isEmpty()
-    .withMessage("L'ID de la recette est requis.")
+    .withMessage('L/ID de la recette est requis.')
     .bail()
 
     .custom(async (value) => {
       const recipe = await Recipe.getById(value);
       if (!recipe) {
-        throw new Error("Cette recette n'existe pas.");
+        throw new Error('Cette recette n/existe pas.');
       }
       return true;
     }),
   check('title')
     .optional()
     .isLength({ min: 6 })
-    .withMessage("Le titre doit contenir au moins 6 caractères."),
+    .withMessage('Le titre doit contenir au moins 6 caractères.'),
   check('type')
     .optional()
     .not()
@@ -85,12 +87,12 @@ const getByIdRequestValidator = [
   param('id')
     .not()
     .isEmpty()
-    .withMessage("L'ID de la recette est requis.")
+    .withMessage('L/ID de la recette est requis.')
     .bail()
     .custom(async (value) => {
       const recipe = await Recipe.getById(value);
       if (!recipe) {
-        throw new Error("Cette recette n'existe pas.");
+        throw new Error('Cette recette n/existe pas.');
       }
       return true;
     }),
