@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "gestion-recette-backend",
   "main": "app.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jasmine",
     "start": "nodemon app.js"
   },
   "author": "Fatimata Aliou Sall",
@@ -15,8 +16,13 @@
     "express": "^4.21.0",
     "express-validator": "^7.2.0",
     "http-status-codes": "^2.3.0",
+    "jasmine-spec-reporter": "^7.0.0",
     "morgan": "^1.10.0",
     "mysql2": "^3.11.2",
     "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "jasmine": "^5.3.0",
+    "jest": "^29.7.0"
   }
 }
