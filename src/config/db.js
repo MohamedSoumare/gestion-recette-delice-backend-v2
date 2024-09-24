@@ -11,12 +11,15 @@ const connection = mysql.createPool({
   port: process.env.DB_PORT,
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  queueLimit: 0,
 });
 
 // Test the connection
-connection.getConnection()
+connection
+  .getConnection()
   .then(() => console.log('Connexion à la base de données réussie !'))
-  .catch((err) => console.error('Erreur de connexion à la base de données :', err.message));
+  .catch((err) =>
+    console.error('Erreur de connexion à la base de données :', err.message)
+  );
 
 export default connection;
