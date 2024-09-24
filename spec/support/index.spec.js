@@ -1,4 +1,4 @@
-import Recipe from '../../src/models/recipeModel.js';
+import Recipe from '../../src/models/RecipeModel.js';
 
 describe('Recipe tests', () => {
   let recipeId = null;
@@ -20,7 +20,7 @@ describe('Recipe tests', () => {
     const recipeCreated = await Recipe.getById(recipeId);
     expect(recipeId).not.toBeNull();
     expect(recipeCreated).not.toBeNull();
-    expect(recipeCreated.title).toBe(recipe.titre); // Assurez-vous que le titre correspond
+    expect(recipeCreated.title).toBe(recipe.titre); 
   });
 
   it('cannot be created with invalid data', async () => {
@@ -37,7 +37,7 @@ describe('Recipe tests', () => {
         recipe.description,
         recipe.ingredient
       );
-    }).rejects.toThrow(); // Vérifie qu'une erreur est lancée
+    }).rejects.toThrow(); 
   });
 
   it('can get all recipes', async () => {
@@ -64,6 +64,6 @@ describe('Recipe tests', () => {
     expect(result.affectedRows).toBe(1);
 
     const deletedRecipe = await Recipe.getById(recipeId);
-    expect(deletedRecipe).toEqual([]); // Vérifie que la recette est supprimée
+    expect(deletedRecipe).toEqual([]); 
   });
 });
