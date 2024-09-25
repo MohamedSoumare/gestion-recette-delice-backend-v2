@@ -22,11 +22,7 @@ describe('Recipe tests', () => {
     expect(recipeCreated.title).toBe(recipe.title);
   });
 
-<<<<<<< HEAD
   it('cannot be created with invalid data', async () => {
-=======
-  it('can not be created', async () => {
->>>>>>> 7e1b2385647c992b9fd5381abf51c56ee8aa62aa
     const recipe = {
       title: null,
       type: 'dessert',
