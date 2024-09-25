@@ -1,6 +1,4 @@
-
-import Recipe from '../models/RecipeModel.js ';
-
+import Recipe from '../models/RecipeModel.js';
 
 const recipeController = {
   async getAllRecipes(req, res) {
@@ -12,8 +10,6 @@ const recipeController = {
       res.status(500).json({ message: 'Erreur serveur' });
     }
   },
-
-
   async getRecipeById(req, res) {
     const { id } = req.params;
     try {
@@ -36,7 +32,6 @@ const recipeController = {
     }
   },
 
-
   async updateRecipe(req, res) {
     const { id } = req.params;
     const updatedData = req.body;
@@ -46,6 +41,8 @@ const recipeController = {
     } catch (error) {
       console.error('Erreur dans updateRecipe:', error);
       res.status(500).json({ message: 'Erreur lors de la mise à jour de la recette' });
+    }
+  },
 
   async deleteRecipe(req, res) {
     const { id } = req.params;
@@ -58,5 +55,4 @@ const recipeController = {
     }
   },
 };
-
-export default recipeController;
+export default recipeController;        
