@@ -2,7 +2,7 @@
 
 Ceci est l'API backend pour l'application de gestion de recettes, développée avec Express.js. Elle fournit une interface RESTful pour gérer les recettes, permettant de créer, lire, mettre à jour et supprimer des recettes dans une base de données. L'API est conçue pour être consommée par le frontend afin de gérer les opérations sur les recettes.
 
-## Mise en place du projet
+
 
 ## Prérequis
 
@@ -10,30 +10,31 @@ Ceci est l'API backend pour l'application de gestion de recettes, développée a
 - MySQL (version 8 ou supérieure)
 - Docker (version 20 ou supérieure)
 
+## Mise en place du projet
 Pour configurer le projet, suivez ces étapes :
 
 1. Cloner le dépôt :
 
-   ```bash
+```bash
    git clone https://github.com/FatimataAliouSall/gestion-recette-api-express.git
    cd gestion-recette-api-express
-   ```
+```
 
 2. Installer les dépendances :
 
-   ```bash
+```bash
    npm install
-   ```
+```
 
 3. Démarrer le serveur :
 
-   ```bash
-   npm start
-   ```
+```bash
+  npm start
+```
 
 4. Créez un fichier .env à la racine du projet et configurez les variables d'environnement pour la connexion à la base de données :
 
-```
+```bash
     DB_HOST=localhost
     DB_USER=root
     DB_PASSWORD=your-password
@@ -79,29 +80,31 @@ L'API sera accessible à l'adresse http://localhost:3000.
 
 1. Construire l'image Docker :
 
-```docker build -t votre-nom-utilisateur/nom_image-management-recipe .
+```bash 
+  docker build -t votre-nom-utilisateur/nom_image-management-recipe .
 ```
 2. Tag l'image  docker :
+```bash 
   docker tag <image-id> votre-nom-utilisateur/nom_image-management-recipe
-
+```
 3. Déployer l'image sur Docker Hub :
 
-```docker push votre-nom-utilisateur/nom_image-management-recipe
-
+```bash
+  docker push votre-nom-utilisateur/nom_image-management-recipe
 ```
 
 3. Démarrer l'application conteneurisée avec Docker Compose :
 
-```docker-compose up -d
-
+```bash
+  docker-compose up -d
 ```
 
 ## Tests
 
 Les tests unitaires sont écrits avec Jasmine. Pour les exécuter, utilisez la commande :
 
-```npm test
-
+```bash
+  npm test
 ```
 
 ## Configuration de la base de données
