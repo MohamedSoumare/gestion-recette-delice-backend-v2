@@ -6,5 +6,5 @@ yarn-error.log
 .vscode
 .git
 .gitignore
-.docker-compose
+
 .env

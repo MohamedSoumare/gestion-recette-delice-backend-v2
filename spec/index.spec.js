@@ -45,7 +45,7 @@ describe('Recipe tests', () => {
   it('can get all recipes', async () => {
     const getAll = await Recipe.getAll();
     expect(getAll).not.toBeNull();
-    expect(Array.isArray(getAll)).toBe(true); // Ensure it's an array
+    expect(Array.isArray(getAll)).toBe(true); 
   });
 
   it('can update a recipe', async () => {
