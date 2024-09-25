@@ -1,0 +1,27 @@
+version: "3" # Assurez-vous de spécifier la version de Docker Compose
+
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: localhost
+      DB_USER: root
+      DB_PASSWORD: c22851
+      DB_NAME: recipes_management
+    depends_on:
+      - db # Correction de la dépendance sur le service db
+
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3307:3306"
+
+volumes:
+  db-data:

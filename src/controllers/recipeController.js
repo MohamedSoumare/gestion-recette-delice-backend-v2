@@ -1,6 +1,6 @@
-import Recipe from '../models/RecipeModel.js';
+import Recipe from '../models/RecipeModel.js ';
 
-const recipeController = {
+const RecipeController = {
   async getAllRecipes(req, res) {
     try {
       const recipes = await Recipe.getAll();
@@ -55,4 +55,4 @@ const recipeController = {
     }
   },
 };
-export default recipeController;        
+export default RecipeController;        
