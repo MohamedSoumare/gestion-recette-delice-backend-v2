@@ -10,6 +10,12 @@ Ceci est l'API backend pour l'application de gestion de recettes, développée a
 
 ## Mise en place du projet
 
+## Prérequis
+
+- Node.js (version 18 ou supérieure)
+- MySQL (version 8 ou supérieure)
+- Docker (version 20 ou supérieure)
+
 Pour configurer le projet, suivez ces étapes :
 
 1. Cloner le dépôt :
@@ -40,7 +46,6 @@ Pour configurer le projet, suivez ces étapes :
     DB_NAME=recipes_management
     PORT=3000
 ```
-
 L'API sera accessible à l'adresse http://localhost:3000.
 
 ## Endpoints de l'API
