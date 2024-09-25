@@ -64,13 +64,13 @@ L'API sera accessible à l'adresse http://localhost:3000.
 - Endpoint : /api/recipes/edit/:id
 - Description : Met à jour une recette par son ID.
 
-5. Supprimer une recette
+5. Supprimer une recette.
 
 - Méthode : DELETE
 - Endpoint : /api/recipes/delete/:id
 - Description : Supprime une recette par son ID.
 
-## Conteneurisation et déploiement
+## Conteneurisation et déploiement.
 
 1. Construire l'image Docker :
 
