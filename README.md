@@ -85,35 +85,27 @@ L'API sera accessible à l'adresse http://localhost:3000.
 
 1. Construire l'image Docker :
 
-<<<<<<< HEAD
 ```bash
   docker build -t votre-nom-utilisateur/nom_image-management-recipe .
-=======
-```docker build -t votre-nom-utilisateur/nom_image-management-recipe .
->>>>>>> 0e146d4 (updated readme)
 ```
 2. Tag l'image  docker :
-  docker tag <image-id> votre-nom-utilisateur/nom_image-management-recipe
-
-<<<<<<< HEAD
-2. Tag l'image docker :
 
 ```bash
   docker tag <image-id> votre-nom-utilisateur/nom_image-management-recipe
 ```
-=======
-3. Déployer l'image sur Docker Hub :
+3. Tag l'image docker :
 
-```docker push votre-nom-utilisateur/nom_image-management-recipe
->>>>>>> 0e146d4 (updated readme)
+```bash
+  docker tag <image-id> votre-nom-utilisateur/nom_image-management-recipe
+```
 
-3. Déployer l'image sur Docker Hub :
+4. Déployer l'image sur Docker Hub :
 
 ```bash
   docker push votre-nom-utilisateur/nom_image-management-recipe
 ```
 
-3. Démarrer l'application conteneurisée avec Docker Compose :
+5. Démarrer l'application conteneurisée avec Docker Compose :
 
 ```bash
   docker-compose up -d
