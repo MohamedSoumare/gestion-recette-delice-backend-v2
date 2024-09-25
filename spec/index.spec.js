@@ -22,7 +22,7 @@ describe('Recipe tests', () => {
     expect(recipeCreated.title).toBe(recipe.title);
   });
 
-  it('can not be created', async () => {
+  it('cannot be created with invalid data', async () => {
     const recipe = {
       title: null,
       type: 'dessert',
@@ -45,6 +45,7 @@ describe('Recipe tests', () => {
   it('can get all recipes', async () => {
     const getAll = await Recipe.getAll();
     expect(getAll).not.toBeNull();
+    expect(Array.isArray(getAll)).toBe(true); 
   });
 
   it('can update a recipe', async () => {
@@ -58,14 +59,16 @@ describe('Recipe tests', () => {
     expect(result.affectedRows).toBe(1);
 
     const updatedRecipe = await Recipe.getById(recipeId);
-    expect(updatedRecipe.title).toBe(updatedData.title);
+    expect(updatedRecipe.title).toBe(updatedData.title); // Vérifie que le titre a bien été mis à jour
+    expect(updatedRecipe.description).toBe(updatedData.description); // Vérifie aussi la description
   });
 
+  // Test de suppression de recette
   it('can delete a recipe', async () => {
     const result = await Recipe.delete(recipeId);
     expect(result.affectedRows).toBe(1);
 
     const deletedRecipe = await Recipe.getById(recipeId);
-    expect(deletedRecipe).toBeNull();
+    expect(deletedRecipe).toBeNull(); // On attend que la recette soit supprimée
   });
 });

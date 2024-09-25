@@ -2,6 +2,9 @@ import db from '../config/db.js';
 
 const Recipe = {
   create: async (title, type, description, ingredient) => {
+    if (!title) {
+      throw new Error('Title cannot be null');
+    }
     const query =
       'INSERT INTO recipes (title, type, description, ingredient) VALUES (?, ?, ?, ?)';
     const [result] = await db.query(query, [
@@ -18,7 +21,7 @@ const Recipe = {
       'SELECT COUNT(*) as count FROM recipes WHERE title = ?',
       [title]
     );
-    return rows[0].count; // Returns the number of recipes with this title
+    return rows[0].count > 0;
   },
 
   getById: async (id) => {
@@ -40,11 +43,10 @@ const Recipe = {
     return result;
   },
 
-  // Méthode de suppression
   delete: async (id) => {
     const query = 'DELETE FROM recipes WHERE id = ?';
     const [result] = await db.query(query, [id]);
-    return result;
+    return result; // assurez-vous que la valeur de retour correspond à ce que vous testez
   },
 
   getAll: async () => {

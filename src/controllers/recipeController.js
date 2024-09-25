@@ -1,6 +1,6 @@
 import Recipe from '../models/RecipeModel.js ';
 
-const recipeController = {
+const RecipeController = {
   async getAllRecipes(req, res) {
     try {
       const recipes = await Recipe.getAll();
@@ -10,7 +10,6 @@ const recipeController = {
       res.status(500).json({ message: 'Erreur serveur' });
     }
   },
-
   async getRecipeById(req, res) {
     const { id } = req.params;
     try {
@@ -62,5 +61,4 @@ const recipeController = {
     }
   },
 };
-
-export default recipeController;
+export default RecipeController;

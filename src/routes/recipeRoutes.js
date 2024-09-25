@@ -1,5 +1,6 @@
 import express from 'express';
-import recipeController from '../controllers/RecipeController.js ';
+import RecipeController from '../controllers/RecipeController.js ';
+
 import {
   addRequestValidator,
   deleteRequestValidator,
@@ -9,22 +10,22 @@ import {
 
 const router = express.Router();
 
-router.get('/recipes', recipeController.getAllRecipes);
+router.get('/recipes', RecipeController.getAllRecipes);
 router.get(
   '/recipes/:id',
   getByIdRequestValidator,
-  recipeController.getRecipeById
+  RecipeController.getRecipeById
 );
-router.post('/recipes/add', addRequestValidator, recipeController.addRecipe);
+router.post('/recipes/add', addRequestValidator, RecipeController.addRecipe);
 router.put(
   '/recipes/edit/:id',
   updateRequestValidator,
-  recipeController.updateRecipe
+  RecipeController.updateRecipe
 );
 router.delete(
   '/recipes/delete/:id',
   deleteRequestValidator,
-  recipeController.deleteRecipe
+  RecipeController.deleteRecipe
 );
 
 export default router;

@@ -1,19 +1,17 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import db from './src/config/db.js';
-import recipeRoutes from './src/routes/RecipeRoutes.js ';
+import RecipeRoutes from './src/routes/RecipeRoutes.js ';
 
-dotenv.config(); // Charge les variables d'environnement depuis un fichier .env
-
+dotenv.config();
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
 
-app.use('/api', recipeRoutes);
+app.use('/api', RecipeRoutes);
 
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3090; 
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });

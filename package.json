@@ -2,15 +2,14 @@
   "name": "recette-backend",
   "version": "1.0.0",
   "description": "gestion-recette-backend",
-  "type": "module",
   "main": "app.js",
   "scripts": {
     "prepare": "husky install",
     "test": "jasmine",
-    "format": "prettier --write .",
     "start": "nodemon app.js",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "format": "prettier  --write ."
   },
   "author": "Fatimata Aliou Sall",
   "license": "ISC",
