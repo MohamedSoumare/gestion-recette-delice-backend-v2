@@ -1,4 +1,4 @@
-##  gestion-recette-api-express
+## gestion-recette-api-express
 
 Ceci est l'API backend pour l'application de gestion de recettes, développée avec Express.js. Elle fournit une interface RESTful pour gérer les recettes, permettant de créer, lire, mettre à jour et supprimer des recettes dans une base de données. L'API est conçue pour être consommée par le frontend afin de gérer les opérations sur les recettes.
 
@@ -14,21 +14,25 @@ Pour configurer le projet, suivez ces étapes :
 
 1. Cloner le dépôt :
 
-    ```bash
+   ```bash
    git clone https://github.com/FatimataAliouSall/gestion-recette-api-express.git
    cd gestion-recette-api-express
    ```
-2. Installer les dépendances :  
 
-    ```bash
+2. Installer les dépendances :
+
+   ```bash
    npm install
    ```
+
 3. Démarrer le serveur :
-  
-    ```bash
+
+   ```bash
    npm start
    ```
+
 4. Créez un fichier .env à la racine du projet et configurez les variables d'environnement pour la connexion à la base de données :
+
 ```
     DB_HOST=localhost
     DB_USER=root
@@ -36,9 +40,10 @@ Pour configurer le projet, suivez ces étapes :
     DB_NAME=recipes_management
     PORT=3000
 ```
+
 L'API sera accessible à l'adresse http://localhost:3000.
 
-##  Endpoints de l'API
+## Endpoints de l'API
 
 1. Créer une recette
 
@@ -75,20 +80,30 @@ L'API sera accessible à l'adresse http://localhost:3000.
 1. Construire l'image Docker :
 
 ```docker build -t votre-nom-utilisateur/image-management-recipe-api .
+
 ```
+
 2. Déployer l'image sur Docker Hub :
+
 ```docker push votre-nom-utilisateur/image-management-recipe-api
+
 ```
+
 3. Démarrer l'application conteneurisée avec Docker Compose :
 
 ```docker-compose up -d
+
 ```
+
 ## Tests
+
 Les tests unitaires sont écrits avec Jasmine. Pour les exécuter, utilisez la commande :
 
 ```npm test
+
 ```
-##  Configuration de la base de données
+
+## Configuration de la base de données
 
 La connexion à la base de données est configurée manuellement sans utiliser d'ORM. Pour configurer la base de données, créez une base MySQL nommée gestion_recettes, puis modifiez les informations de connexion tellesques DB_HOST, DB_USER, DB_PASS, DB_NAME dans le fichier ./env .
 

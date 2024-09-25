@@ -5,7 +5,9 @@ import Recipe from '../models/RecipeModel.js ';
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({ errors: errors.array() });
+    return res
+      .status(StatusCodes.UNPROCESSABLE_ENTITY)
+      .json({ errors: errors.array() });
   }
   next();
 };
@@ -61,7 +63,7 @@ const updateRequestValidator = [
   check('title')
     .optional()
     .isLength({ min: 6 })
-    .withMessage("Le titre doit contenir au moins 6 caractères."),
+    .withMessage('Le titre doit contenir au moins 6 caractères.'),
   check('type')
     .optional()
     .not()

@@ -28,7 +28,9 @@ const RecipeController = {
       res.status(200).json({ message: 'Recette créée avec succès' });
     } catch (error) {
       console.error('Erreur dans addRecipe:', error);
-      res.status(500).json({ message: 'Erreur lors de la création de la recette' });
+      res
+        .status(500)
+        .json({ message: 'Erreur lors de la création de la recette' });
     }
   },
 
@@ -40,7 +42,9 @@ const RecipeController = {
       res.status(200).json({ message: 'Recette mise à jour avec succès' });
     } catch (error) {
       console.error('Erreur dans updateRecipe:', error);
-      res.status(500).json({ message: 'Erreur lors de la mise à jour de la recette' });
+      res
+        .status(500)
+        .json({ message: 'Erreur lors de la mise à jour de la recette' });
     }
   },
 
@@ -51,8 +55,10 @@ const RecipeController = {
       res.status(200).json({ message: 'Recette supprimée avec succès' });
     } catch (error) {
       console.error('Erreur dans deleteRecipe:', error);
-      res.status(500).json({ message: 'Erreur lors de la suppression de la recette' });
+      res
+        .status(500)
+        .json({ message: 'Erreur lors de la suppression de la recette' });
     }
   },
 };
-export default RecipeController;        
+export default RecipeController;
