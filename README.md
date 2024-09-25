@@ -46,6 +46,7 @@ Pour configurer le projet, suivez ces étapes :
     DB_NAME=recipes_management
     PORT=3000
 ```
+
 L'API sera accessible à l'adresse http://localhost:3000.
 
 ## Endpoints de l'API
