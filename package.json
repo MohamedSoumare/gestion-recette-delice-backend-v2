@@ -10,14 +10,7 @@
     "format": "prettier --write .",
     "start": "nodemon app.js",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "lint-staged": {
-  "*.js": [
-    "prettier --write",
-    "eslint --fix"
-  ]
-}
-
+    "lint:fix": "eslint . --fix"
   },
   "author": "Fatimata Aliou Sall",
   "license": "ISC",
