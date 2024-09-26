@@ -6,7 +6,7 @@ import {
   deleteRequestValidator,
   getByIdRequestValidator,
   updateRequestValidator,
-} from '../validators/RecipeValidat.js';
+} from '../validators/RecipeValidat.js ';
 
 const router = express.Router();
 
