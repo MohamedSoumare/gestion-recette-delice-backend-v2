@@ -11,6 +11,7 @@ const Recipe = {
       title,
       type,
       ingredient,
+      categorie
     ]);
     return result;
   },
@@ -36,6 +37,7 @@ const Recipe = {
       updatedData.title,
       updatedData.type,
       updatedData.ingredient,
+      updatedData.categorie_id,
       id,
     ]);
     return result;

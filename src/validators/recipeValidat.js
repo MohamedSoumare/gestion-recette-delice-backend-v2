@@ -28,6 +28,23 @@ const addRequestValidator = [
       }
       return true;
     }),
+  check('type')
+    .optional()
+    .not()
+    .isEmpty()
+    .withMessage('Le type de recette est requis.'),
+  check('ingredient')
+    .optional()
+    .not()
+    .isEmpty()
+    .withMessage('Les ingrédients sont requis.'),
+  check('categorie')
+    .not()
+    .isEmpty()
+    .withMessage('La catégorie ne peut pas être vide.')
+    .bail()
+    .isLength({ max: 50 })
+    .withMessage('Le nom de la catégorie ne doit pas dépasser 50 caractères.'),
   handleValidationErrors,
 ];
 
