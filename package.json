@@ -2,6 +2,7 @@
   "name": "recette-backend",
   "version": "1.0.0",
   "description": "gestion-recette-backend",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "prepare": "husky install",
