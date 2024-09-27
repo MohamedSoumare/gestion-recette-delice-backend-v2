@@ -74,12 +74,12 @@ const updateRequestValidator = [
     .not()
     .isEmpty()
     .withMessage('Les ingrédients sont requis.'),
-  check('description')
-    .optional()
-    .not()
-    .isEmpty()
-    .withMessage('La description est requise.'),
-  handleValidationErrors,
+  // check('description')
+  //   .optional()
+  //   .not()
+  //   .isEmpty()
+  //   .withMessage('La description est requise.'),
+  // handleValidationErrors,
 ];
 
 const getByIdRequestValidator = [

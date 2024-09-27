@@ -6,13 +6,11 @@ describe('Recipe tests', () => {
     const recipe = {
       title: 'crepe',
       type: 'dessert',
-      description: 'pâte à base de farine',
       ingredient: 'farine',
     };
     const result = await Recipe.create(
       recipe.title,
       recipe.type,
-      recipe.description,
       recipe.ingredient
     );
     recipeId = result.insertId;
@@ -26,14 +24,12 @@ describe('Recipe tests', () => {
     const recipe = {
       title: null,
       type: 'dessert',
-      description: 'pâte à base de farine',
       ingredient: 'farine',
     };
     try {
       await Recipe.create(
         recipe.title,
         recipe.type,
-        recipe.description,
         recipe.ingredient
       );
       fail('Expected an error to be thrown');
@@ -52,23 +48,21 @@ describe('Recipe tests', () => {
     const updatedData = {
       title: 'updated crepe',
       type: 'dessert',
-      description: 'updated description',
       ingredient: 'updated ingredient',
     };
     const result = await Recipe.update(recipeId, updatedData);
     expect(result.affectedRows).toBe(1);
 
     const updatedRecipe = await Recipe.getById(recipeId);
-    expect(updatedRecipe.title).toBe(updatedData.title); // Vérifie que le titre a bien été mis à jour
-    expect(updatedRecipe.description).toBe(updatedData.description); // Vérifie aussi la description
+    expect(updatedRecipe.title).toBe(updatedData.title); 
+    expect(updatedRecipe.description).toBe(updatedData.description); 
   });
 
-  // Test de suppression de recette
   it('can delete a recipe', async () => {
     const result = await Recipe.delete(recipeId);
     expect(result.affectedRows).toBe(1);
 
     const deletedRecipe = await Recipe.getById(recipeId);
-    expect(deletedRecipe).toBeNull(); // On attend que la recette soit supprimée
+    expect(deletedRecipe).toBeNull(); 
   });
 });

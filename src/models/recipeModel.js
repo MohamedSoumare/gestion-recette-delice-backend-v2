@@ -1,16 +1,15 @@
 import db from '../config/db.js';
 
 const Recipe = {
-  create: async (title, type, description, ingredient) => {
+  create: async (title, type, ingredient) => {
     if (!title) {
       throw new Error('Title cannot be null');
     }
     const query =
-      'INSERT INTO recipes (title, type, description, ingredient) VALUES (?, ?, ?, ?)';
+      'INSERT INTO recipes (title, type, ingredient) VALUES (?, ?, ?)';
     const [result] = await db.query(query, [
       title,
       type,
-      description,
       ingredient,
     ]);
     return result;
@@ -32,11 +31,10 @@ const Recipe = {
 
   update: async (id, updatedData) => {
     const query =
-      'UPDATE recipes SET title = ?, type = ?, description = ?, ingredient = ? WHERE id = ?';
+      'UPDATE recipes SET title = ?, type = ?,  ingredient = ? WHERE id = ?';
     const [result] = await db.query(query, [
       updatedData.title,
       updatedData.type,
-      updatedData.description,
       updatedData.ingredient,
       id,
     ]);
@@ -46,7 +44,7 @@ const Recipe = {
   delete: async (id) => {
     const query = 'DELETE FROM recipes WHERE id = ?';
     const [result] = await db.query(query, [id]);
-    return result; // assurez-vous que la valeur de retour correspond à ce que vous testez
+    return result; 
   },
 
   getAll: async () => {
