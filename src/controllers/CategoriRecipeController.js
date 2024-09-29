@@ -20,8 +20,10 @@ const addCategorie = async (req, res) => {
       id: newCategorie.insertId,
     });
   } catch (error) {
-    console.error('Erreur lors de l\'ajout de la catégorie:', error);
-    res.status(500).json({ message: 'Erreur lors de l\'ajout de la catégorie.' });
+    console.error("Erreur lors de l'ajout de la catégorie:", error);
+    res
+      .status(500)
+      .json({ message: "Erreur lors de l'ajout de la catégorie." });
   }
 };
 
