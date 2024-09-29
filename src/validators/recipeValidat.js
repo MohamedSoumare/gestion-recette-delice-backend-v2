@@ -72,7 +72,6 @@ const deleteRequestValidator = [
     }),
   handleValidationErrors,
 ];
-
 const updateRequestValidator = [
   param('id')
     .not()

@@ -29,11 +29,7 @@ router.get(
 );
 router.post('/recipes/add', addRequestValidator, RecipeController.addRecipe);
 
-router.put(
-  '/recipes/edit/:id',
-  updateRequestValidator,
-  RecipeController.updateRecipe
-);
+router.put('/recipes/edit/:id',updateRequestValidator,RecipeController.updateRecipe);
 router.delete(
   '/recipes/delete/:id',
   deleteRequestValidator,
