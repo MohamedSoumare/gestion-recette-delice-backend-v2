@@ -15,7 +15,7 @@ const Recipe = {
     ]);
     return result;
   },
-  
+
   checkRecipe: async (title) => {
     const [rows] = await db.query(
       'SELECT COUNT(*) as count FROM recipes WHERE title = ?',
@@ -41,7 +41,7 @@ const Recipe = {
 
   update: async (id, updatedData) => {
     const query =
-      'UPDATE recipes SET title = ?, type = ?, ingredient = ?, categorie_id = ? WHERE id = ?'; 
+      'UPDATE recipes SET title = ?, type = ?, ingredient = ?, categorie_id = ? WHERE id = ?';
     const [result] = await db.query(query, [
       updatedData.title,
       updatedData.type,
@@ -55,9 +55,9 @@ const Recipe = {
   delete: async (id) => {
     const query = 'DELETE FROM recipes WHERE id = ?';
     const [result] = await db.query(query, [id]);
-    return result; 
+    return result;
   },
-  
+
   getAll: async () => {
     const query = 'SELECT * FROM recipes';
     const [rows] = await db.query(query);

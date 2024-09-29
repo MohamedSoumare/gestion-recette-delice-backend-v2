@@ -11,20 +11,29 @@ const Category = {
     const [rows] = await db.query(query);
     return rows;
   },
+
   getById: async (id) => {
     const query = 'SELECT * FROM categories WHERE id = ?';
     const [rows] = await db.query(query, [id]);
     return rows.length > 0 ? rows[0] : null;
   },
+
   update: async (id, nom) => {
     const query = 'UPDATE categories SET name = ? WHERE id = ?';
     const [result] = await db.query(query, [nom, id]);
     return result;
   },
+
   delete: async (id) => {
     const query = 'DELETE FROM categories WHERE id = ?';
     const [result] = await db.query(query, [id]);
     return result;
+  },
+
+  checkCategoryName: async (nom) => {
+    const query = 'SELECT * FROM categories WHERE name = ?';
+    const [rows] = await db.query(query, [nom]);
+    return rows.length > 0 ? rows[0] : null;
   },
 };
 

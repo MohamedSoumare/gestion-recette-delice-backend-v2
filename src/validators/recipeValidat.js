@@ -1,13 +1,12 @@
 import { check, param, validationResult } from 'express-validator';
 import { StatusCodes } from 'http-status-codes';
 import Recipe from '../models/RecipeModel.js ';
+import Category from '../models/CategorieModel.js';
 
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res
-      .status(StatusCodes.UNPROCESSABLE_ENTITY)
-      .json({ errors: errors.array() });
+    return res.status(404).json({ errors: errors.array() });
   }
   next();
 };
@@ -27,11 +26,8 @@ const addRequestValidator = [
       }
       return true;
     }),
-  
-  check('type')
-    .not()
-    .isEmpty()
-    .withMessage('Le type de recette est requis.'),
+
+  check('type').not().isEmpty().withMessage('Le type de recette est requis.'),
 
   check('ingredient')
     .not()
@@ -87,7 +83,7 @@ const updateRequestValidator = [
     }),
 
   check('title')
-    .optional() // Le titre est facultatif, car il peut ne pas être modifié
+    .optional()
     .not()
     .isEmpty()
     .withMessage('Le titre ne peut pas être vide.')
@@ -151,18 +147,23 @@ const getByIdRequestValidator = [
   handleValidationErrors,
 ];
 
-// Validator for adding a category
 const addCategoryValidator = [
   check('nom')
     .not()
     .isEmpty()
     .withMessage('Le nom de la catégorie ne peut pas être vide.')
     .isLength({ max: 50 })
-    .withMessage('Le nom de la catégorie ne doit pas dépasser 50 caractères.'),
+    .withMessage('Le nom de la catégorie ne doit pas dépasser 50 caractères.')
+    .custom(async (value) => {
+      const existingCategory = await Category.checkCategoryName(value);
+      if (existingCategory) {
+        throw new Error('Une catégorie avec ce nom existe déjà.');
+      }
+      return true;
+    }),
   handleValidationErrors,
 ];
 
-// Validator for updating a category
 const updateCategoryValidator = [
   param('id')
     .isNumeric()
@@ -172,15 +173,49 @@ const updateCategoryValidator = [
     .isEmpty()
     .withMessage('Le nom de la catégorie ne peut pas être vide.')
     .isLength({ max: 50 })
-    .withMessage('Le nom de la catégorie ne doit pas dépasser 50 caractères.'),
+    .withMessage('Le nom de la catégorie ne doit pas dépasser 50 caractères.')
+    .bail()
+    .custom(async (value, { req }) => {
+      const existingCategory = await Category.checkCategoryName(value);
+      if (
+        existingCategory &&
+        existingCategory.id !== parseInt(req.params.id, 10)
+      ) {
+        throw new Error('Une catégorie avec ce nom existe déjà.');
+      }
+      return true;
+    }),
   handleValidationErrors,
 ];
 
-// Validator for deleting a category
 const deleteCategoryValidator = [
   param('id')
     .isNumeric()
-    .withMessage('L\'ID de la catégorie doit être un nombre.'),
+    .withMessage('L\'ID de la catégorie doit être un nombre.')
+    .bail()
+    .custom(async (value) => {
+      const categorie = await Category.getById(value);
+      if (!categorie) {
+        throw new Error('Cette catégorie n\'existe pas.');
+      }
+      return true;
+    }),
+  handleValidationErrors,
+];
+
+const getByIdCategorieRequestValidator = [
+  param('id')
+    .not()
+    .isEmpty()
+    .withMessage('L\'ID de la catégorie est requis.')
+    .bail()
+    .custom(async (value) => {
+      const categorie = await Category.getById(value);
+      if (!categorie) {
+        throw new Error('Cette catégorie n\'existe pas.');
+      }
+      return true;
+    }),
   handleValidationErrors,
 ];
 
@@ -192,4 +227,5 @@ export {
   addCategoryValidator,
   updateCategoryValidator,
   deleteCategoryValidator,
+  getByIdCategorieRequestValidator,
 };

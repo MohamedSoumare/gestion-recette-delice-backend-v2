@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import RecipeRoutes from './src/routes/RecipeRoutes.js';
+import RecipeRoutes from './src/routes/RecipeRoutes.js ';
 
 dotenv.config();
 
@@ -12,9 +12,11 @@ const port = process.env.PORT || 3090;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({
-  origin: 'http://localhost'
-}));
+app.use(
+  cors({
+    origin: 'http://localhost',
+  })
+);
 app.use(cors());
 
 // Routes

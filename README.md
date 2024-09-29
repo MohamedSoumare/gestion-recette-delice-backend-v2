@@ -2,8 +2,6 @@
 
 Ceci est l'API backend pour l'application de gestion de recettes, développée avec Express.js. Elle fournit une interface RESTful pour gérer les recettes, permettant de créer, lire, mettre à jour et supprimer des recettes dans une base de données. L'API est conçue pour être consommée par le frontend afin de gérer les opérations sur les recettes.
 
-
-
 ## Prérequis
 
 - Node.js (version 18 ou supérieure)
@@ -11,6 +9,7 @@ Ceci est l'API backend pour l'application de gestion de recettes, développée a
 - Docker (version 20 ou supérieure)
 
 ## Mise en place du projet
+
 Pour configurer le projet, suivez ces étapes :
 
 1. Cloner le dépôt :
@@ -80,13 +79,16 @@ L'API sera accessible à l'adresse http://localhost:3000.
 
 1. Construire l'image Docker :
 
-```bash 
+```bash
   docker build -t votre-nom-utilisateur/nom_image-management-recipe .
 ```
-2. Tag l'image  docker :
-```bash 
+
+2. Tag l'image docker :
+
+```bash
   docker tag <image-id> votre-nom-utilisateur/nom_image-management-recipe
 ```
+
 3. Déployer l'image sur Docker Hub :
 
 ```bash
