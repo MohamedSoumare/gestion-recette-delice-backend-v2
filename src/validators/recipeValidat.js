@@ -33,7 +33,6 @@ const addRequestValidator = [
     .not()
     .isEmpty()
     .withMessage('Les ingrédients sont requis.'),
-
   check('categorie_id')
     .not()
     .isEmpty()
@@ -45,7 +44,7 @@ const addRequestValidator = [
     .custom(async (value) => {
       const existingCategory = await Recipe.checkCategory(value);
       if (!existingCategory) {
-        throw new Error("Cette catégorie n'existe pas.");
+        throw new Error('Cette catégorie n\'existe pas.');
       }
       return true;
     }),
@@ -57,12 +56,12 @@ const deleteRequestValidator = [
   param('id')
     .not()
     .isEmpty()
-    .withMessage("L'ID est obligatoire.")
+    .withMessage('L\'ID est obligatoire.')
     .bail()
     .custom(async (value) => {
       const recipe = await Recipe.getById(value);
       if (!recipe) {
-        throw new Error("Cette recette n'existe pas.");
+        throw new Error('Cette recette n\'existe pas.');
       }
       return true;
     }),
@@ -72,12 +71,12 @@ const updateRequestValidator = [
   param('id')
     .not()
     .isEmpty()
-    .withMessage("L'ID de la recette est requis.")
+    .withMessage('L\'ID de la recette est requis.')
     .bail()
     .custom(async (value) => {
       const recipe = await Recipe.getById(value);
       if (!recipe) {
-        throw new Error("Cette recette n'existe pas.");
+        throw new Error('Cette recette n\'existe pas.');
       }
       return true;
     }),
@@ -123,7 +122,7 @@ const updateRequestValidator = [
     .custom(async (value) => {
       const existingCategory = await Recipe.checkCategory(value);
       if (!existingCategory) {
-        throw new Error("Cette catégorie n'existe pas.");
+        throw new Error('Cette catégorie n\'existe pas.');
       }
       return true;
     }),
@@ -135,12 +134,12 @@ const getByIdRequestValidator = [
   param('id')
     .not()
     .isEmpty()
-    .withMessage("L'ID de la recette est requis.")
+    .withMessage('L\'ID de la recette est requis.')
     .bail()
     .custom(async (value) => {
       const recipe = await Recipe.getById(value);
       if (!recipe) {
-        throw new Error("Cette recette n'existe pas.");
+        throw new Error('Cette recette n\'existe pas.');
       }
       return true;
     }),
@@ -167,7 +166,7 @@ const addCategoryValidator = [
 const updateCategoryValidator = [
   param('id')
     .isNumeric()
-    .withMessage("L`'ID de la catégorie doit être un nombre."),
+    .withMessage('L\'ID de la catégorie doit être un nombre.'),
   check('nom')
     .not()
     .isEmpty()
@@ -191,12 +190,12 @@ const updateCategoryValidator = [
 const deleteCategoryValidator = [
   param('id')
     .isNumeric()
-    .withMessage("L'ID de la catégorie doit être un nombre.")
+    .withMessage('L\'ID de la catégorie doit être un nombre.')
     .bail()
     .custom(async (value) => {
       const categorie = await Category.getById(value);
       if (!categorie) {
-        throw new Error("Cette catégorie n'existe pas.");
+        throw new Error('Cette catégorie n\'existe pas.');
       }
       return true;
     }),
@@ -207,12 +206,12 @@ const getByIdCategorieRequestValidator = [
   param('id')
     .not()
     .isEmpty()
-    .withMessage("L'ID de la catégorie est requis.")
+    .withMessage('L\'ID de la catégorie est requis.')
     .bail()
     .custom(async (value) => {
       const categorie = await Category.getById(value);
       if (!categorie) {
-        throw new Error("Cette catégorie n'existe pas.");
+        throw new Error('Cette catégorie n\'existe pas.');
       }
       return true;
     }),
