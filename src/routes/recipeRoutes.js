@@ -1,3 +1,4 @@
+// recipeRoutes.js
 import express from 'express';
 import RecipeController from '../controllers/RecipeController.js ';
 import {
@@ -5,49 +6,31 @@ import {
   deleteRequestValidator,
   getByIdRequestValidator,
   updateRequestValidator,
-} from '../validators/RecipeValidat.js ';
+} from '../validators/RecipeValidator.js';
 
-import {
-  getCategories,
-  addCategorie,
-  updateCategorie,
-  deleteCategorie,
-} from '../controllers/CategoriRecipeController.js';
+import CategoriRecipeController from '../controllers/CategoriRecipeController.js';
+
 import {
   getByIdCategorieRequestValidator,
   addCategoryValidator,
   updateCategoryValidator,
   deleteCategoryValidator,
-} from '../validators/recipeValidat.js';
+} from '../validators/RecipeValidator.js';
 
 const router = express.Router();
 
+// Routes for recipes
 router.get('/recipes', RecipeController.getAllRecipes);
-router.get(
-  '/recipes/:id',
-  getByIdRequestValidator,
-  RecipeController.getRecipeById
-);
+router.get('/recipes/:id', getByIdRequestValidator, RecipeController.getRecipeById);
 router.post('/recipes/add', addRequestValidator, RecipeController.addRecipe);
-router.put(
-  '/recipes/edit/:id',
-  updateRequestValidator,
-  RecipeController.updateRecipe
-);
-router.delete(
-  '/recipes/delete/:id',
-  deleteRequestValidator,
-  RecipeController.deleteRecipe
-);
+router.put('/recipes/edit/:id', updateRequestValidator, RecipeController.updateRecipe);
+router.delete('/recipes/delete/:id', deleteRequestValidator, RecipeController.deleteRecipe);
 
-router.get('/categories', getCategories);
-router.get('/categories/:id', getByIdCategorieRequestValidator, getCategories);
-router.post('/categories/add', addCategoryValidator, addCategorie);
-router.put('/categories/edit/:id', updateCategoryValidator, updateCategorie);
-router.delete(
-  '/categories/delete/:id',
-  deleteCategoryValidator,
-  deleteCategorie
-);
+// Routes for categories
+router.get('/categories', CategoriRecipeController.getCategories);
+router.get('/categories/:id', getByIdCategorieRequestValidator, CategoriRecipeController.getCategories);
+router.post('/categories/add', addCategoryValidator, CategoriRecipeController.addCategorie);
+router.put('/categories/edit/:id', updateCategoryValidator, CategoriRecipeController.updateCategorie);
+router.delete('/categories/delete/:id', deleteCategoryValidator, CategoriRecipeController.deleteCategorie);
 
 export default router;

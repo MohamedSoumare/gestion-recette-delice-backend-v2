@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import RecipeRoutes from './src/routes/RecipeRoutes.js ';
+import router from './src/routes/recipeRoutes.js';
 
 dotenv.config();
 
@@ -10,18 +10,15 @@ const port = process.env.PORT || 3090;
 
 // Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-app.use(
-  cors({
-    origin: 'http://localhost:80',
-  })
-);
-app.use(cors());
+const corsOptions = {
+  origin: '*',
+  methods: 'GET,POST,PUT,DELETE',
+};
+app.use(cors(corsOptions));
+app.use(router);
 
-// Routes
-app.use('/api', RecipeRoutes);
-
+// Démarrer le serveur
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

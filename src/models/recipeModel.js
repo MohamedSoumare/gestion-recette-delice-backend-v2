@@ -1,45 +1,34 @@
 import db from '../config/db.js';
 
-const Recipe = {
-  create: async (title, type, ingredient, categorie_id) => {
-    if (!title) {
-      throw new Error('Title cannot be null');
-    }
-    const query =
-      'INSERT INTO recipes (title, type, ingredient, categorie_id) VALUES (?, ?, ?, ?)';
-    const [result] = await db.query(query, [
-      title,
-      type,
-      ingredient,
-      categorie_id,
-    ]);
+class RecipeModel {
+  static async create({ title, type, ingredient, categorie_id }) {
+    const query = 'INSERT INTO recipes (title, type, ingredient, categorie_id) VALUES (?, ?, ?, ?)';
+    const [result] = await db.query(query, [title, type, ingredient, categorie_id]);
     return result;
-  },
-
-  checkRecipe: async (title) => {
+  }
+  
+  static async checkRecipe(title) {
     const [rows] = await db.query(
       'SELECT COUNT(*) as count FROM recipes WHERE title = ?',
       [title]
     );
     return rows[0].count > 0;
-  },
+  }
 
-  // Nouvelle méthode pour vérifier si la catégorie existe
-  checkCategory: async (categorie_id) => {
+  static async checkCategory(categorie_id) {
     const [rows] = await db.query(
       'SELECT COUNT(*) as count FROM categories WHERE id = ?',
       [categorie_id]
     );
     return rows[0].count > 0;
-  },
+  }
 
-  getById: async (id) => {
+  static async getById(id) {
     const query = 'SELECT * FROM recipes WHERE id = ?';
     const [rows] = await db.query(query, [id]);
     return rows.length > 0 ? rows[0] : null;
-  },
-
-  update: async (id, updatedData) => {
+  }
+  static async update(id, updatedData) {
     const query =
       'UPDATE recipes SET title = ?, type = ?, ingredient = ?, categorie_id = ? WHERE id = ?';
     const [result] = await db.query(query, [
@@ -50,19 +39,22 @@ const Recipe = {
       id,
     ]);
     return result;
-  },
+  }
 
-  delete: async (id) => {
+  static async delete(id) {
     const query = 'DELETE FROM recipes WHERE id = ?';
     const [result] = await db.query(query, [id]);
     return result;
-  },
-
-  getAll: async () => {
-    const query = 'SELECT * FROM recipes';
+  }
+  static async getAll() {
+    const query = `
+      SELECT r.*, c.name as categorie_name 
+      FROM recipes r 
+      LEFT JOIN categories c ON r.categorie_id = c.id
+    `;
     const [rows] = await db.query(query);
     return rows;
-  },
-};
+  }
+}
 
-export default Recipe;
+export default RecipeModel;

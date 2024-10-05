@@ -1,7 +1,7 @@
 import Recipe from '../models/RecipeModel.js ';
 
-const RecipeController = {
-  async getAllRecipes(req, res) {
+class RecipeController {
+  static async getAllRecipes(req, res) {
     try {
       const recipes = await Recipe.getAll();
       res.json(recipes);
@@ -9,20 +9,23 @@ const RecipeController = {
       console.error('Erreur dans getAllRecipes:', error);
       res.status(500).json({ message: 'Erreur serveur' });
     }
-  },
-
-  async getRecipeById(req, res) {
+  }
+  
+  static async getRecipeById(req, res) {
     const { id } = req.params;
     try {
       const recipe = await Recipe.getById(id);
+      if (!recipe) {
+        return res.status(404).json({ message: 'Recette non trouvée' });
+      }
       res.json(recipe);
     } catch (error) {
       console.error('Erreur dans getRecipeById:', error);
       res.status(500).json({ message: 'Erreur serveur' });
     }
-  },
+  }
 
-  async updateRecipe(req, res) {
+  static async updateRecipe(req, res) {
     const { id } = req.params;
     const updatedData = req.body;
     try {
@@ -35,13 +38,11 @@ const RecipeController = {
         error: error.message,
       });
     }
-  },
-
-  async addRecipe(req, res) {
+  }
+  static async addRecipe(req, res) {
     const { title, type, ingredient, categorie_id } = req.body;
-
     try {
-      await Recipe.create(title, type, ingredient, categorie_id);
+      await Recipe.create({ title, type, ingredient, categorie_id });
       res.status(201).json({ message: 'Recette créée avec succès' });
     } catch (error) {
       console.error('Erreur dans addRecipe:', error);
@@ -50,11 +51,13 @@ const RecipeController = {
         error: error.message,
       });
     }
-  },
+  }
 
-  async deleteRecipe(req, res) {
+  static async deleteRecipe(req, res) {
     const { id } = req.params;
     try {
+      await Recipe.getById(id);
+
       await Recipe.delete(id);
       res.status(200).json({ message: 'Recette supprimée avec succès' });
     } catch (error) {
@@ -63,7 +66,7 @@ const RecipeController = {
         .status(500)
         .json({ message: 'Erreur lors de la suppression de la recette' });
     }
-  },
-};
+  }
+}
 
 export default RecipeController;
