@@ -6,7 +6,7 @@ class RecipeModel {
     const [result] = await db.query(query, [title, type, ingredient, categorie_id]);
     return result;
   }
-  
+
   static async checkRecipe(title) {
     const [rows] = await db.query(
       'SELECT COUNT(*) as count FROM recipes WHERE title = ?',
@@ -28,9 +28,9 @@ class RecipeModel {
     const [rows] = await db.query(query, [id]);
     return rows.length > 0 ? rows[0] : null;
   }
+
   static async update(id, updatedData) {
-    const query =
-      'UPDATE recipes SET title = ?, type = ?, ingredient = ?, categorie_id = ? WHERE id = ?';
+    const query = 'UPDATE recipes SET title = ?, type = ?, ingredient = ?, categorie_id = ? WHERE id = ?';
     const [result] = await db.query(query, [
       updatedData.title,
       updatedData.type,
@@ -46,11 +46,12 @@ class RecipeModel {
     const [result] = await db.query(query, [id]);
     return result;
   }
+
   static async getAll() {
     const query = `
       SELECT r.*, c.name as categorie_name 
       FROM recipes r 
-      LEFT JOIN categories c ON r.categorie_id = c.id
+      INNER JOIN categories c ON r.categorie_id = c.id
     `;
     const [rows] = await db.query(query);
     return rows;

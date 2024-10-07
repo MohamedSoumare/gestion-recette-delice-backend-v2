@@ -1,5 +1,5 @@
 import { check, param, validationResult } from 'express-validator';
-import Recipe from '../models/RecipeModel.js ';
+import Recipe from '../models/RecipeModel.js';
 import Category from '../models/CategorieModel.js';
 
 const handleValidationErrors = (req, res, next) => {
@@ -25,9 +25,7 @@ const addRequestValidator = [
       }
       return true;
     }),
-
   check('type').not().isEmpty().withMessage('Le type de recette est requis.'),
-
   check('ingredient')
     .not()
     .isEmpty()
@@ -43,13 +41,12 @@ const addRequestValidator = [
     .custom(async (value) => {
       const existingCategory = await Recipe.checkCategory(value);
       if (!existingCategory) {
-        throw new Error('Cette catégorie existe pas.');
+        throw new Error('Cette catégorie n\'existe pas.');
       }
       return true;
     }),
   handleValidationErrors,
 ];
-
 const deleteRequestValidator = [
   param('id')
     .not()

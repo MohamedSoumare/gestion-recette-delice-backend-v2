@@ -1,20 +1,15 @@
-// recipeRoutes.js
 import express from 'express';
-import RecipeController from '../controllers/RecipeController.js ';
+import RecipeController from '../controllers/RecipeController.js';
+import CategoriRecipeController from '../controllers/CategoriRecipeController.js';
 import {
   addRequestValidator,
   deleteRequestValidator,
   getByIdRequestValidator,
   updateRequestValidator,
-} from '../validators/RecipeValidator.js';
-
-import CategoriRecipeController from '../controllers/CategoriRecipeController.js';
-
-import {
-  getByIdCategorieRequestValidator,
   addCategoryValidator,
   updateCategoryValidator,
   deleteCategoryValidator,
+  getByIdCategorieRequestValidator
 } from '../validators/RecipeValidator.js';
 
 const router = express.Router();
