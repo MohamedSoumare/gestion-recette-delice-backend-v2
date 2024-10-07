@@ -10,7 +10,7 @@ import {
   updateCategoryValidator,
   deleteCategoryValidator,
   getByIdCategorieRequestValidator
-} from '../validators/RecipeValidator.js';
+} from '../validators/recipeValidator.js';
 
 const router = express.Router();
 
