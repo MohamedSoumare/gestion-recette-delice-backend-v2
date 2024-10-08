@@ -28,10 +28,15 @@ class Category {
 
   static async delete(id) {
     const query = 'DELETE FROM categories WHERE id = ?';
-    const [result] = await db.query(query, [id]);
-    return result;
+    try {
+      const [result] = await db.query(query, [id]);
+      return result;
+    } catch (error) {
+      console.error('Erreur SQL lors de la suppression de la catégorie:', error);
+      throw error;
+    }
   }
-
+  
   static async checkCategoryName(nom) {
     const query = 'SELECT * FROM categories WHERE name = ?';
     const [rows] = await db.query(query, [nom]);

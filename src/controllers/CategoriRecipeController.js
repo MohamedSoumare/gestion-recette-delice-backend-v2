@@ -64,19 +64,16 @@ class CategoryRecipeController {
   static async deleteCategorie(req, res) {
     const { id } = req.params;
     try {
-      const categorie = await Category.getById(id);
-      if (categorie) {
-        await Category.delete(id);
-        res.status(200).json({ message: 'Catégorie supprimée avec succès.' });
-      } else {
-        res.status(404).json({ message: 'Catégorie non trouvée.' });
-      }
+     
+      
+      await Category.delete(id);
+      return res.status(200).json({ message: 'Catégorie supprimée avec succès.' });
     } catch (error) {
-      res
-        .status(500)
-        .json({ message: 'Erreur lors de la suppression de la catégorie.' });
+      console.error('Erreur lors de la suppression de la catégorie:', error);
+      return res.status(500).json({ message: 'Erreur lors de la suppression de la catégorie.', error: error.message });
     }
   }
+  
 }
 
 export default CategoryRecipeController;
