@@ -41,7 +41,7 @@ const addRequestValidator = [
     .custom(async (value) => {
       const existingCategory = await Recipe.checkCategory(value);
       if (!existingCategory) {
-        throw new Error('Cette catégorie n\'existe pas.');
+        throw new Error('Cette catégorie est introuvable.');
       }
       return true;
     }),
@@ -146,8 +146,8 @@ const addCategoryValidator = [
     .not()
     .isEmpty()
     .withMessage('Le nom de la catégorie ne peut pas être vide.')
-    .isLength({ max: 50 })
-    .withMessage('Le nom de la catégorie ne doit pas dépasser 50 caractères.')
+    .isLength({ max: 100 })
+    .withMessage('Le nom de la catégorie ne doit pas dépasser 100 caractères.')
     .custom(async (value) => {
       const existingCategory = await Category.checkCategoryName(value);
       if (existingCategory) {
@@ -166,8 +166,8 @@ const updateCategoryValidator = [
     .not()
     .isEmpty()
     .withMessage('Le nom de la catégorie ne peut pas être vide.')
-    .isLength({ max: 50 })
-    .withMessage('Le nom de la catégorie ne doit pas dépasser 50 caractères.')
+    .isLength({ max: 100 })
+    .withMessage('Le nom de la catégorie ne doit pas dépasser 100 caractères.')
     .bail()
     .custom(async (value, { req }) => {
       const existingCategory = await Category.checkCategoryName(value);

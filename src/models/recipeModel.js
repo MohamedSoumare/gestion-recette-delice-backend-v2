@@ -2,8 +2,14 @@ import db from '../config/db.js';
 
 class RecipeModel {
   static async create({ title, type, ingredient, categorie_id }) {
-    const query = 'INSERT INTO recipes (title, type, ingredient, categorie_id) VALUES (?, ?, ?, ?)';
-    const [result] = await db.query(query, [title, type, ingredient, categorie_id]);
+    const query =
+      'INSERT INTO recipes (title, type, ingredient, categorie_id) VALUES (?, ?, ?, ?)';
+    const [result] = await db.query(query, [
+      title,
+      type,
+      ingredient,
+      categorie_id,
+    ]);
     return result;
   }
 
@@ -30,7 +36,8 @@ class RecipeModel {
   }
 
   static async update(id, updatedData) {
-    const query = 'UPDATE recipes SET title = ?, type = ?, ingredient = ?, categorie_id = ? WHERE id = ?';
+    const query =
+      'UPDATE recipes SET title = ?, type = ?, ingredient = ?, categorie_id = ? WHERE id = ?';
     const [result] = await db.query(query, [
       updatedData.title,
       updatedData.type,
