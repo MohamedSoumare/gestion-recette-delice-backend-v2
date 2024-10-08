@@ -17,7 +17,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(router);
 
-const port = process.env.PORT || 3090;
+const port = process.env.PORT || 3002;
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
