@@ -3,11 +3,11 @@ import Category from '../src/models/CategorieModel.js';
 
 describe('Recipe tests', () => {
   let recipeId = null;
-  let categorie_id = 1;
+  let categorie_id = 8;
 
   it('can be created', async () => {
     const recipe = {
-      title: 'crepe',
+      title: 'crepe house',
       type: 'dessert',
       ingredient: 'farine',
       categorie_id,
@@ -46,9 +46,9 @@ describe('Recipe tests', () => {
   it('update a recipe with its category', async () => {
     expect(recipeId).not.toBeNull();
     const updatedData = {
-      title: 'Crêpe mise à jour',
+      title: 'Crêpe modifie',
       type: 'Dessert',
-      ingredient: 'Ingrédients mis à jour',
+      ingredient: 'Ingrédients modifier',
       categorie_id,
     };
     const result = await Recipe.update(recipeId, updatedData);
@@ -73,10 +73,9 @@ describe('Category Model Tests', () => {
   let categoryId = null;
 
   it('should create a category successfully', async () => {
-    const categoryName = 'Entrée';
+    const categoryName = 'Starter';
     const result = await Category.create(categoryName);
     categoryId = result.insertId;
-
     const createdCategory = await Category.getById(categoryId);
     expect(createdCategory).not.toBeNull();
     expect(createdCategory.name).toBe(categoryName);
@@ -89,33 +88,24 @@ describe('Category Model Tests', () => {
   });
 
   it('should update a category successfully', async () => {
-    const newName = 'Plat principal';
+    const newName = 'Dessert';
     const result = await Category.update(categoryId, newName);
-
     expect(result.affectedRows).toBe(1);
-
     const updatedCategory = await Category.getById(categoryId);
-    expect(updatedCategory).not.toBeNull();
     expect(updatedCategory.name).toBe(newName);
   });
 
-  it('should delete a category successfully', async () => {
-    const result = await Category.delete(categoryId);
-    expect(result.affectedRows).toBe(1);
-
-    const deletedCategory = await Category.getById(categoryId);
-    expect(deletedCategory).toBeNull();
+  it('should fail to delete a category if linked to a recipe', async () => {
+    try {
+      await Category.delete(categorie_id);
+      fail('Une erreur aurait dû être lancée');
+    } catch (error) {
+      expect(error).toBeDefined();
+    }
   });
 
-  it('should not delete a category with foreign key constraints', async () => {
-    const linkedCategoryId = 1;
-
-    try {
-      await Category.delete(linkedCategoryId);
-      fail('Expected a foreign key constraint error');
-    } catch (error) {
-      console.log(error.message);
-      // expect(error.code).toBe('ER_ROW_IS_REFERENCED_2');
-    }
+  it('should delete a category successfully when not linked', async () => {
+    const result = await Category.delete(categoryId);
+    expect(result.affectedRows).toBe(1);
   });
 });

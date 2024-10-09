@@ -13,30 +13,6 @@ class RecipeModel {
     return result;
   }
 
-  static async checkRecipe(title) {
-    const [rows] = await db.query(
-      'SELECT COUNT(*) as count FROM recipes WHERE title = ?',
-      [title]
-    );
-    return rows[0].count > 0;
-  }
-
-  static async checkCategory(categorie_id) {
-    const [rows] = await db.query(
-      'SELECT COUNT(*) as count FROM categories WHERE id = ?',
-      [categorie_id]
-    );
-    return rows[0].count > 0;
-  }
-
-  
-
-  static async deleteRecipesByCategoryId(categoryId) {
-    const query = 'DELETE FROM recipes WHERE categorie_id = ?';
-    const [result] = await db.query(query, [categoryId]);
-    return result;
-  }
-
   static async getById(id) {
     const query = 'SELECT * FROM recipes WHERE id = ?';
     const [rows] = await db.query(query, [id]);
@@ -70,6 +46,26 @@ class RecipeModel {
     `;
     const [rows] = await db.query(query);
     return rows;
+  }
+
+  static async checkRecipe(title) {
+    const [rows] = await db.query(
+      'SELECT COUNT(*) as count FROM recipes WHERE title = ?',
+      [title]
+    );
+    return rows[0].count > 0;
+  }
+  static async checkCategory(categorie_id) {
+    const [rows] = await db.query(
+      'SELECT COUNT(*) as count FROM categories WHERE id = ?',
+      [categorie_id]
+    );
+    return rows[0].count > 0;
+  }
+  static async deleteRecipesByCategoryId(categoryId) {
+    const query = 'DELETE FROM recipes WHERE categorie_id = ?';
+    const [result] = await db.query(query, [categoryId]);
+    return result;
   }
 }
 
