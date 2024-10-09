@@ -26,22 +26,27 @@ class Category {
     return result;
   }
 
-  static async delete(id) {
-    const query = 'DELETE FROM categories WHERE id = ?';
-    try {
-      const [result] = await db.query(query, [id]);
-      return result;
-    } catch (error) {
-      console.error('Erreur SQL lors de la suppression de la catégorie:', error);
-      throw error;
-    }
-  }
   
   static async checkCategoryName(nom) {
     const query = 'SELECT * FROM categories WHERE name = ?';
     const [rows] = await db.query(query, [nom]);
     return rows.length > 0 ? rows[0] : null;
   }
+  
+  // Vérifier si la catégorie est utilisée par des recettes
+  static async isCategoryUsed(id) {
+    const query = 'SELECT COUNT(*) as count FROM recipes WHERE categorie_id = ?';
+    const [rows] = await db.query(query, [id]);
+    return rows[0].count > 0; 
+  }
+
+  static async deleteCategory(categoryId) {
+    const query = 'DELETE FROM categories WHERE id = ?';
+    const [result] = await db.query(query, [categoryId]);
+    return result;
+  }
+  
+  
 }
 
 export default Category;

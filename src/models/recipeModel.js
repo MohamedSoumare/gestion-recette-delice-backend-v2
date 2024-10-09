@@ -29,6 +29,14 @@ class RecipeModel {
     return rows[0].count > 0;
   }
 
+  
+
+  static async deleteRecipesByCategoryId(categoryId) {
+    const query = 'DELETE FROM recipes WHERE categorie_id = ?';
+    const [result] = await db.query(query, [categoryId]);
+    return result;
+  }
+
   static async getById(id) {
     const query = 'SELECT * FROM recipes WHERE id = ?';
     const [rows] = await db.query(query, [id]);

@@ -1,4 +1,5 @@
 import Recipe from '../models/RecipeModel.js';
+import Category from '../models/CategorieModel.js'; // Import Category
 
 class RecipeController {
   static async getAllRecipes(req, res) {
@@ -55,9 +56,7 @@ class RecipeController {
         ingredient,
         categorie_id,
       });
-      res
-        .status(201)
-        .json({ message: 'Recette créée avec succès', recipe: result });
+      res.status(201).json({ message: 'Recette créée avec succès', recipe: result });
     } catch (error) {
       console.error('Erreur dans addRecipe:', error);
       res.status(500).json({
@@ -67,6 +66,7 @@ class RecipeController {
     }
   }
 
+   
   static async deleteRecipe(req, res) {
     const { id } = req.params;
     try {
@@ -79,11 +79,9 @@ class RecipeController {
       res.status(200).json({ message: 'Recette supprimée avec succès' });
     } catch (error) {
       console.error('Erreur dans deleteRecipe:', error);
-      res
-        .status(500)
-        .json({ message: 'Erreur lors de la suppression de la recette' });
+      res.status(500).json({ message: 'Erreur lors de la suppression de la recette' });
     }
   }
-}
-
+} 
+  
 export default RecipeController;
