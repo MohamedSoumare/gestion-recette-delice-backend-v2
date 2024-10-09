@@ -66,22 +66,33 @@ class RecipeController {
     }
   }
 
-   
   static async deleteRecipe(req, res) {
     const { id } = req.params;
     try {
+      // Récupérer la recette par ID
       const recipe = await Recipe.getById(id);
       if (!recipe) {
-        return res.status(404).json({ message: 'Recette non trouvée' });
+        return res.status(404).json({ message: 'Recette non trouvée.' });
       }
-
+  
+      // Supprimer la recette
       await Recipe.delete(id);
-      res.status(200).json({ message: 'Recette supprimée avec succès' });
+  
+      // Vérifier si d'autres recettes sont liées à la même catégorie
+      const otherRecipes = await Recipe.getAll();
+      const remainingRecipes = otherRecipes.filter(r => r.categorie_id === recipe.categorie_id);
+  
+      // Si aucune autre recette n'est liée à la catégorie, supprimer la catégorie
+      if (remainingRecipes.length === 0) {
+        await Category.delete(recipe.categorie_id);
+      }
+  
+      res.status(200).json({ message: 'Recette et catégorie associée supprimées.' });
     } catch (error) {
-      console.error('Erreur dans deleteRecipe:', error);
-      res.status(500).json({ message: 'Erreur lors de la suppression de la recette' });
+      console.error('Erreur lors de la suppression de la recette:', error);
+      res.status(500).json({ message: 'Erreur serveur' });
     }
   }
-} 
+}  
   
 export default RecipeController;
