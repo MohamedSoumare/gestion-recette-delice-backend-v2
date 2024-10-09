@@ -15,8 +15,8 @@ Pour configurer le projet, suivez ces étapes :
 1. Cloner le dépôt :
 
 ```bash
-   git clone https://github.com/FatimataAliouSall/gestion-recette-api-express.git
-   cd gestion-recette-api-express
+   git https://github.com/MohamedSoumare/gestion-recette-delice-backend-v2.git
+   cd  gestion-recette-delice-backend-v2
 ```
 
 2. Installer les dépendances :
@@ -48,25 +48,25 @@ L'API sera accessible à l'adresse http://localhost:3090.
 1. Créer une recette
 
 - Méthode : POST
-- Endpoint : /api/recipes
+- Endpoint : /recipes
 - Description : Ajoute une nouvelle recette dans la base de données.
 
 2. Obtenir toutes les recettes
 
 - Méthode : GET
-- Endpoint : /api/recipes
+- Endpoint : /recipes
 - Description : Récupère toutes les recettes de la base de données.
 
 3. Obtenir une recette par ID
 
 - Méthode : GET
-- Endpoint : /api/recipes/:id
+- Endpoint : /recipes/:id
 - Description : Récupère une recette par son ID.
 
 4. Mettre à jour une recette
 
 - Méthode : PUT
-- Endpoint : /api/recipes/edit/:id
+- Endpoint : /recipes/edit/:id
 - Description : Met à jour une recette par son ID.
 
 5. Supprimer une recette.
@@ -74,32 +74,6 @@ L'API sera accessible à l'adresse http://localhost:3090.
 - Méthode : DELETE
 - Endpoint : /api/recipes/delete/:id
 - Description : Supprime une recette par son ID.
-
-## Conteneurisation et déploiement.
-
-1. Construire l'image Docker :
-
-```bash
-  docker build -t votre-nom-utilisateur/nom_image-management-recipe .
-```
-
-2. Tag l'image docker :
-
-```bash
-  docker tag <image-id> votre-nom-utilisateur/nom_image-management-recipe
-```
-
-3. Déployer l'image sur Docker Hub :
-
-```bash
-  docker push votre-nom-utilisateur/nom_image-management-recipe
-```
-
-3. Démarrer l'application conteneurisée avec Docker Compose :
-
-```bash
-  docker-compose up -d
-```
 
 ## Tests
 
@@ -115,5 +89,4 @@ La connexion à la base de données est configurée manuellement sans utiliser d
 
 ## Auteurs
 
-- **[Fatimata Aliou Sall](https://github.com/fatimata-sall)** - Développeuse Full Stack
 - **[Mohamed Soumare](https://github.com/MohamedSoumare)** - Développeur Full Stack
