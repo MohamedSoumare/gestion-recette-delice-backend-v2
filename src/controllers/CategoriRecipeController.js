@@ -70,7 +70,7 @@ class CategoryRecipeController {
         });
       }
 
-      await Category.deleteCategory(id); // Utiliser deleteCategory ici
+      await Category.delete(id); 
       res.status(200).json({ message: 'Catégorie supprimée avec succès.' });
     } catch (error) {
       console.error('Erreur lors de la suppression de la catégorie:', error);

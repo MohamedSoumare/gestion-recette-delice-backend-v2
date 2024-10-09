@@ -37,6 +37,11 @@ class CategoryModel {
     const [rows] = await db.query(query, [categorie_id]);
     return rows[0].count > 0;
   }
+  static async checkCategoryName(nom) {
+    const query = 'SELECT * FROM categories WHERE name = ?';
+    const [rows] = await db.query(query, [nom]);
+    return rows.length > 0 ? rows[0] : null;
+  }
 }
 
 export default CategoryModel;
